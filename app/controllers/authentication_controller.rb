@@ -6,6 +6,14 @@ class AuthenticationController < ApplicationController
     json_response(auth_token: auth_token)
   end
 
+  def logout
+    auth_token = AuthorizeApiRequest.new(request.headers)
+    if auth_token.call[:user].present?
+      blacklisted_token = BlacklistedToken.find_or_initialize_by(token: request.headers['Authorization'])
+      blacklisted_token.save
+    end
+  end
+
   private
 
   def auth_params

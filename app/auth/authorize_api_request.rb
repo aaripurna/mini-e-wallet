@@ -29,7 +29,11 @@ class AuthorizeApiRequest
 
   # decode authentication token
   def decoded_auth_token
-    @decoded_auth_token ||= JsonWebToken.decode(http_auth_header)
+    token = JsonWebToken.decode(http_auth_header)
+    if BlacklistedToken.find_by_token(http_auth_header).present?
+      raise ExceptionHandler::AuthenticationError, Message.expired_token
+    end
+    @decoded_auth_token ||= token
   end
 
   # check for token in `Authorization` header
@@ -37,7 +41,6 @@ class AuthorizeApiRequest
     if headers['Authorization'].present?
       return headers['Authorization'].split(' ').last
     end
-
     raise(ExceptionHandler::MissingToken, Message.missing_token)
   end
 end
