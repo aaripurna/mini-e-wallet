@@ -1,0 +1,23 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user_balance: one
+  balance_before: 1
+  balance_after: 1
+  activity: MyString
+  type: 1
+  ip: MyString
+  location: MyString
+  user_agent: MyString
+  author: MyString
+
+two:
+  user_balance: two
+  balance_before: 1
+  balance_after: 1
+  activity: MyString
+  type: 1
+  ip: MyString
+  location: MyString
+  user_agent: MyString
+  author: MyString

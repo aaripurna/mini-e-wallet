@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_30_124436) do
+ActiveRecord::Schema.define(version: 2020_11_30_224839) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -19,6 +19,30 @@ ActiveRecord::Schema.define(version: 2020_11_30_124436) do
     t.text "token"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "user_balance_histories", force: :cascade do |t|
+    t.bigint "user_balance_id"
+    t.integer "balance_before"
+    t.integer "balance_after"
+    t.string "activity"
+    t.integer "transaction_type"
+    t.string "ip"
+    t.string "location"
+    t.string "user_agent"
+    t.string "author"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_balance_id"], name: "index_user_balance_histories_on_user_balance_id"
+  end
+
+  create_table "user_balances", force: :cascade do |t|
+    t.integer "balance"
+    t.integer "balance_achive"
+    t.bigint "user_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_user_balances_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
