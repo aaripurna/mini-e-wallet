@@ -1,6 +1,9 @@
 class TransferService < ApplicationService
   attr_accessor :sender, :receiver, :amount, :ip, :location, :user_agent, :author, :receiver_id
   def execute
+    if sender.id == receiver.id
+      @errors.add(:base, "can't transfer to own account")
+    end
 
     if amount < 1
       @errors.add(:base, :greater_than, count: 0)
