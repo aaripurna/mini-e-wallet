@@ -1,6 +1,7 @@
 class User < ApplicationRecord
   has_secure_password
   has_many :user_balances
+  has_many :user_balance_histories, through: :user_balances
 
   validates_presence_of %i[username email password_digest]
   validates_uniqueness_of :email, case_insensitive: true

@@ -8,6 +8,7 @@ Rails.application.routes.draw do
       get '/', to: 'balances#index'
       post :topup
       post :transfer
+      get :histories
     end
   end
 end

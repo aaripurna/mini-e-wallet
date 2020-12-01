@@ -21,6 +21,10 @@ class BalancesController < ApplicationController
     render json: { errors: service.errors }, status: 422
   end
 
+  def histories
+    @histories = current_user.user_balance_histories.order(id: :desc)
+  end
+
   private
 
   def balance_params
