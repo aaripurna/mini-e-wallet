@@ -1,6 +1,6 @@
 # README
 
-The web framework is Ruby on Rails
+The web framework is Ruby on Rails. database is Postgres
 
 to run this, first create `.env`with this data bellow:
 ```env
