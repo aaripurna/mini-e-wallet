@@ -1,4 +1,8 @@
 class BalancesController < ApplicationController
+  def index
+    @balance = current_user.user_balances.includes(:user_balance_history).last
+  end
+
   def topup
     service = TopupService.execute(user: current_user, ip: request.remote_ip, **balance_params.to_h.symbolize_keys)
     if service.errors.blank?

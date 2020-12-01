@@ -3,8 +3,9 @@ Rails.application.routes.draw do
   delete 'auth/logout', to: 'authentication#logout'
   post 'signup', to: 'users#create'
 
-  resource :balances, only: [:index] do
+  resource :balances, only: [] do
     collection do
+      get '/', to: 'balances#index'
       post :topup
       post :transfer
     end
