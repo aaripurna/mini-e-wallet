@@ -10,10 +10,34 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_30_224839) do
+ActiveRecord::Schema.define(version: 2020_12_01_004434) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "balance_bank_histories", force: :cascade do |t|
+    t.bigint "balance_bank_id"
+    t.integer "balance_before"
+    t.integer "balance_after"
+    t.string "activity"
+    t.integer "transaction_type"
+    t.string "ip"
+    t.string "location"
+    t.string "user_agent"
+    t.string "author"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["balance_bank_id"], name: "index_balance_bank_histories_on_balance_bank_id"
+  end
+
+  create_table "balance_banks", force: :cascade do |t|
+    t.integer "balance"
+    t.integer "balance_achive"
+    t.string "code"
+    t.boolean "enable"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
   create_table "blacklisted_tokens", force: :cascade do |t|
     t.text "token"
