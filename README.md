@@ -1,24 +1,103 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+The web framework is Ruby on Rails
 
-Things you may want to cover:
+to run this, first create `.env`with this data bellow:
+```env
+DATABASE_USERNAME=
+DATABASE_ PASSWORD=
+RAILS_MASTER_KEY=
+```
 
-* Ruby version
+to generate `RAILS_MASTER_KEY` run 
+```sh
+rails secret
+```
 
-* System dependencies
+then run the folowing
+```sh
+bundle install
+rails db:setup
+```
 
-* Configuration
+to run the server
+```sh
+rails s
+```
 
-* Database creation
+the server will run in port 3000
 
-* Database initialization
+## API Docs
 
-* How to run the test suite
+#### Login
+```sh
+curl --request POST \
+  --url http://localhost:3000/auth/login \
+  --header 'Content-Type: application/json' \
+  --data '{
+	"login": "nawa@example.com",
+	"password": "1234lima"
+}'
+```
 
-* Services (job queues, cache servers, search engines, etc.)
+#### Sign Up
+```sh
+curl --request POST \
+  --url http://localhost:3000/signup \
+  --header 'Content-Type: application/json' \
+  --data '{
+	"username": "nawaaa",
+	"email": "nawaa@example.com",
+	"password": "password"
+}'
+```
 
-* Deployment instructions
+#### Log Out
+```sh
+curl --request DELETE \
+  --url http://localhost:3000/auth/logout \
+  --header 'Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE2MDY4MjAxMjZ9.2dsLJRhrVNdB1L0jrrPYGRfjyC9oJqmPyvVrbsymcaE'
+```
 
-* ...
+#### Topup
+```sh
+curl --request POST \
+  --url http://localhost:3000/balances/topup \
+  --header 'Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE2MDY4NjEzMzh9.piVmPupsW0OEHgyBXdZ3D-PPRhQ5iP0MqAX6Lcb4VEY' \
+  --header 'Content-Type: application/json' \
+  --data '{
+	"balance" : {
+		"amount": 200
+	}
+}'
+```
+
+#### Transfer
+```sh
+curl --request POST \
+  --url http://localhost:3000/balances/transfer \
+  --header 'Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE2MDY4NjEzMzh9.piVmPupsW0OEHgyBXdZ3D-PPRhQ5iP0MqAX6Lcb4VEY' \
+  --header 'Content-Type: application/json' \
+  --data '{
+	"balance": {
+		"amount": 700,
+		"receiver_id": 2
+	}
+}'
+```
+
+#### Current Balance
+```sh
+curl --request GET \
+  --url http://localhost:3000/balances \
+  --header 'Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE2MDY4NjEzMzh9.piVmPupsW0OEHgyBXdZ3D-PPRhQ5iP0MqAX6Lcb4VEY'
+```
+
+#### Histories
+```sh
+curl --request GET \
+  --url http://localhost:3000/balances/histories \
+  --header 'Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE2MDY4NjEzMzh9.piVmPupsW0OEHgyBXdZ3D-PPRhQ5iP0MqAX6Lcb4VEY'
+```
+
+
